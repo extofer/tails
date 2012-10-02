@@ -1,0 +1,193 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>Bridge Wait Times</title>
+
+
+<link rel="stylesheet" href="styles/jquery.mobile-1.1.0.min.css" />
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/jquery.mobile-1.1.0.min.js"></script>
+
+<!--
+<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+-->
+<script type="text/javascript" src="js/FeedEk.js"></script>
+
+ 
+ <script type="text/javascript" >
+$(document).ready(function(){
+  /*
+  $('#txtUrl').val('http://apps.cbp.gov/bwt/rss.asp?portList=240201&f=html');
+  $('#txtCount').val('5');
+  $('#chkDate').attr('checked','checked');
+  $('#chkDesc').attr('checked','checked');
+  */
+  
+   $('#divRss').FeedEk({
+   FeedUrl : 'http://apps.cbp.gov/bwt/rss.asp?portList=240201&f=html',
+   MaxCount : 5,
+   ShowDesc : true,
+   ShowPubDate: true
+  });
+  
+});
+
+function OpenBox()
+{
+$('#divSrc').toggle();
+}
+function changeFeedUrl()
+{
+var cnt= 5;
+var showDate=new Boolean();
+showDate=true;
+
+var showDescription=new Boolean();
+showDescription=true;
+
+if($('#txtCount').val()!="") cnt=parseInt($('#txtCount').val());
+if (! $('#chkDate').attr('checked')) showDate=false;
+if (! $('#chkDesc').attr('checked')) showDescription=false;
+
+ $('#divRss').FeedEk({
+   FeedUrl : $('#txtUrl').val(),
+   MaxCount : cnt,
+   ShowDesc : showDescription,
+   ShowPubDate: showDate
+  });
+}
+</script>
+  
+
+
+</head> 
+<body> 
+
+	<div data-role="page" id="page1" data-theme="a">
+
+	<div data-role="header" data-position="fixed">
+			<h1>Bridge Wait Times</h1>
+		</div>
+
+		<div data-role="content" style="background-color:#61615C;"> 
+
+
+<div id="divSrc" style="display:none">
+ <div>Url:<input id="txtUrl" type="text" style="width:440px;font-size:12px;" /></div>
+ <div style="padding-top:3px">
+	<div style="float:left; width:100px">Count:<input id="txtCount" type="text"  style="width:30px;" /></div>
+	<div style="float:left;width:100px">Show Date:<input id="chkDate" type="checkbox"  /></div>
+	<div style="float:left;width:100px">Show Desc:<input id="chkDesc" type="checkbox"  /></div>
+	<div style="float:right"><input type="button" value="Get Feeds" style="width:80px" onclick="javascript:changeFeedUrl();" /></div>
+	<div style="clear:both"></div>
+ </div>
+</div>
+
+<div id="divRss"></div>
+<br/><br/>
+
+		
+		
+		
+		<div id="rssFeed"></div>
+		
+		</div>
+		<div data-role="footer" data-position="fixed">		
+			<div data-role="navbar">
+			<!--
+				<ul>
+				<li><a href="#page1" data-icon="grid">Scan</a></li>
+					<li><a href="#page3" data-icon="star">Favorites</a></li>
+					<li><a href="index.html" data-icon="star">Log out</a></li>
+				</ul>
+				-->
+			</div><!-- /navbar -->
+		</div><!-- /footer -->
+	</div>
+	
+
+	<div data-role="page" id="page2" data-theme="d">
+	<div data-role="header" data-position="fixed">
+		<h1>Product Info</h1>
+	</div>
+
+   
+	        <div data-role="fieldcontain">
+            
+	        <div data-role="content">	
+	            <h2 id="ProdName"></h2>
+	            <div class="ui-grid-a">
+	                <img id="ProdImage" width="180" height="120" />
+	                <p>
+	                    <label for="product">Product:</label>
+	                </p>
+	                <p id="ProdDesc"></p>
+	                <p id="ProdPrice"></p>
+	                <p id="ProdId" hidden="true"></p>
+
+	                <!--
+	                    <div class="ui-block-a">
+	                        <img id="ProdImage" width="180" height="120" />
+	                    </div>
+
+	                    <div class="ui-block-b">
+	                        <p id="ProdDesc"></p>
+	                        <p id="ProdPrice"></p>
+	                    </div>
+	                    -->
+	            </div>
+                
+	           
+	                <a href="#page3" data-role="button" data-icon="plus" data-theme="a">Add to Favorites</a> 
+
+	            <!-- /grid-a 
+	                <input type="submit" value="Add to Favorites" id="btnSubmit"> 
+                    	            -->
+	                </div>
+            </div>
+	    
+
+
+	    
+
+		<!--
+		<a href="www.facebook.com" data-role="button">Share on Facebook</a> 
+		<a href="www.twitter.com" data-role="button">Share on Twitter</a> 
+		-->
+
+	</div>
+	<div data-role="footer" data-position="fixed">		
+	<div data-role="navbar">
+		<ul>
+			<li><a href="#page1" data-icon="grid">Scan</a></li>
+			<li><a href="#page3" data-icon="star">Favorites</a></li>
+			<li><a href="index.html" data-icon="star">Logout</a></li>
+		</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->
+</div>
+
+<div data-role="page" id="page3" data-theme="a">
+    <div data-role="header" data-position="fixed">
+        <h1>Favorites</h1>
+    </div>
+
+    <div data-role="content">	
+        <ul id="prodList" data-role="listview"></ul>
+    </div>
+
+	<div data-role="footer" data-position="fixed">
+	<div data-role="navbar">
+		<ul>
+			<li><a href="#page1" data-icon="grid">Scan</a></li>
+			<li><a href="#page3" data-icon="star">Favorites</a></li>
+			<li><a href="index.html" data-icon="star">Logout</a></li>
+		</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->
+</div>
+
+</body>
+</html>
