@@ -1,0 +1,7 @@
+INDEX VERSION 1.122+C:\Users\gvilla\Documents\Dev-Sandbox\tails\app\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1296931415.index
+1258370752.index
+2624689474.index
+757169693.index
+2812920775.index
+33835972.index
